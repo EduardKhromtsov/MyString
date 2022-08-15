@@ -22,6 +22,26 @@ public:
 		this->pStr[iLength] = '\0'; // В конец строки добавляем нуль-терминатор.
 	}
 
+	MyString& operator = (const MyString &other)
+	{
+		if (this->pStr != nullptr)
+		{
+			delete[] this->pStr;
+		}
+
+		int iLength = strlen(other.pStr); 
+		this->pStr = new char[iLength + 1]; 
+
+		for (int i = 0; i < iLength; ++i)
+		{
+			this->pStr[i] = other.pStr[i]; 
+		}
+
+		this->pStr[iLength] = '\0'; 
+
+		return *this;
+	}
+
 	~MyString()
 	{
 		delete[] this->pStr; // После выхода из области действия функции, в которой был создан объект класса, с помощью деструктора очищаем динамическую память, выделенную под массив pStr.
@@ -33,7 +53,9 @@ private:
 
 int main()
 {
-	MyString a("test");
+	MyString str;
+
+	
 
 	return 0;
 }
