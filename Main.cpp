@@ -22,7 +22,7 @@ public:
 		this->pStr[iLength] = '\0'; // В конец строки добавляем нуль-терминатор.
 	}
 
-	MyString& operator = (const MyString &other)
+	MyString& operator = (const MyString &other) // Перегрузили оператор =.
 	{
 		if (this->pStr != nullptr)
 		{
@@ -41,6 +41,7 @@ public:
 
 		return *this;
 	}
+
 
 	~MyString()
 	{
