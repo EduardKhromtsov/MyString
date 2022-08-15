@@ -42,6 +42,28 @@ public:
 		return *this;
 	}
 
+	MyString operator + (const MyString &other) // Реализовали перегрузку оператора сложения.
+	{
+		MyString NewStr;
+
+		NewStr.pStr = new char[strlen(this->pStr) + strlen(other.pStr) + 1];
+
+		int i = 0;
+
+		for (; i < strlen(this->pStr); ++i)
+		{
+			NewStr.pStr[i] = this->pStr[i];
+		}
+
+		for (int j = 0; j < strlen(other.pStr); ++j, ++i)
+		{
+			NewStr.pStr[i] = other.pStr[j];
+		}
+
+		NewStr.pStr[strlen(this->pStr) + strlen(other.pStr)] = '\0';
+
+		return NewStr;
+	}
 
 	~MyString()
 	{
@@ -54,9 +76,10 @@ private:
 
 int main()
 {
-	MyString str;
+	MyString str = "Hello";
+	MyString str2 = "World";
 
-	
+	MyString result = str + str2;
 
 	return 0;
 }
