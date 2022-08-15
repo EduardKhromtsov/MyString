@@ -22,6 +22,19 @@ public:
 		this->pStr[iLength] = '\0'; // В конец строки добавляем нуль-терминатор.
 	}
 
+	MyString(const MyString& other) // Конструктор копирования.
+	{
+		int iLength = strlen(other.pStr);
+		this->pStr = new char[iLength + 1];
+
+		for (int i = 0; i < iLength; ++i)
+		{
+			this->pStr[i] = other.pStr[i];
+		}
+
+		this->pStr[iLength] = '\0';
+	}
+
 	MyString& operator = (const MyString &other) // Перегрузили оператор присваивания.
 	{
 		if (this->pStr != nullptr)
