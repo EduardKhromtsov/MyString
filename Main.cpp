@@ -81,6 +81,21 @@ public:
 		return NewStr; // Возвращаем результат конкатенации строк.
 	}
 
+	bool operator == (const MyString &other) // Перегрузили оператор равенства.
+	{
+		if (this->iLength != other.iLength) // Если размеры строк не совпадают, то они не равны, тем самым возвращаем false.
+			return false;
+
+		for (int i = 0; i < this->iLength; ++i) // Проходимся поэлементо по строкам, если имеется несовпадение - возвращаем false.
+		{
+			if (this->pStr[i] != other.pStr[i])
+				return false;
+		}
+
+		return true; // Если выше не сработал return false, значит, строки равны, тогда возвращаем true.
+
+	}
+
 	~MyString()
 	{
 		delete[] this->pStr; // После выхода из области действия функции, в которой был создан объект класса, с помощью деструктора очищаем динамическую память, выделенную под массив pStr.
@@ -103,10 +118,6 @@ int main()
 	MyString str2 = "World";
 
 	MyString result = str + str2;
-
-	cout << str.Length() << "\n";
-	cout << str2.Length() << "\n";
-	cout << result.Length() << "\n";
 
 	return 0;
 }
