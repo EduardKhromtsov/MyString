@@ -114,7 +114,9 @@ public:
 		return this->pStr[iIndex];
 	}
 
-	friend std::ostream& operator << (std::ostream& out, const MyString& string); // Создаем дружественную функцию (перегрузку оператора вывода).
+	friend std::ostream& operator << (std::ostream &out, const MyString &string); // Создаем дружественную функцию (перегрузку оператора вывода).
+
+	friend std::istream& operator >> (std::istream &in, MyString &string); // Опять же через дружественную функцию реализуем перегрузку оператора ввода.
 
 	~MyString()
 	{
@@ -131,22 +133,38 @@ private:
 	int iLength;
 };
 
-std::ostream& operator << (std::ostream& out, const MyString& string) // Реализация дружественной функции (перегрузки оператора вывода).
+std::ostream& operator << (std::ostream &out, const MyString &string) // Реализация дружественной функции (перегрузки оператора вывода).
 {
 	out << string.pStr;
 
 	return out;
 }
 
+std::istream& operator >> (std::istream &in, MyString &string) // Реализация дружественной функции (перегрузки оператора ввода).
+{
+	in >> string.pStr;
+
+	string.iLength = strlen(string.pStr);
+
+	return in;
+}
 
 int main()
 {
 	MyString str = "Hello";
 	MyString str2 = "World";
 
+	cout << str << "\n";
+
+	cin >> str;
+
+	cout << str << "\n";
+
 	MyString result;
 
 	result = str + str2;
+
+	cout << result << "\n";
 
 	return 0;
 }
