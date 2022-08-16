@@ -4,12 +4,12 @@ using namespace std;
 class MyString
 {
 public:
-	MyString()
+	MyString() // Конструктор по умолчанию.
 	{
 		pStr = nullptr;
 	}
 
-	MyString(const char *pStr)
+	MyString(const char *pStr) // Конструктор с параметрами, при создании объекта класса в него можно передать строку, которую он будет хранить.
 	{
 		int iLength = strlen(pStr); // Считываем длину строки.
 		this->pStr = new char[iLength + 1]; // Выделяем динамическую память для указателя pStr с размером iLength + 1 (для добавления в конец строки нуль-терминатора).
@@ -22,7 +22,7 @@ public:
 		this->pStr[iLength] = '\0'; // В конец строки добавляем нуль-терминатор.
 	}
 
-	MyString(const MyString& other) // Конструктор копирования.
+	MyString(const MyString& other) // Конструктор копирования. Необходим для создания точной копии объекта класса, но в другой области памяти.
 	{
 		int iLength = strlen(other.pStr);
 		this->pStr = new char[iLength + 1];
@@ -75,7 +75,7 @@ public:
 
 		NewStr.pStr[strlen(this->pStr) + strlen(other.pStr)] = '\0';
 
-		return NewStr;
+		return NewStr; // Возвращаем результат конкатенации строк.
 	}
 
 	~MyString()
@@ -83,7 +83,7 @@ public:
 		delete[] this->pStr; // После выхода из области действия функции, в которой был создан объект класса, с помощью деструктора очищаем динамическую память, выделенную под массив pStr.
 	}
 private:
-	char *pStr; // Создаем указатель на char для принятия строки с произвольной длиной.
+	char *pStr; // Создаем указатель на массив char, хранит символы, которые мы передаем в наш объект.
 };
 
 
