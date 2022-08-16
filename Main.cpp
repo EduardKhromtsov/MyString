@@ -7,11 +7,12 @@ public:
 	MyString() // Конструктор по умолчанию.
 	{
 		pStr = nullptr;
+		iLength = 0;
 	}
 
 	MyString(const char *pStr) // Конструктор с параметрами, при создании объекта класса в него можно передать строку, которую он будет хранить.
 	{
-		int iLength = strlen(pStr); // Считываем длину строки.
+		iLength = strlen(pStr); // Считываем длину строки.
 		this->pStr = new char[iLength + 1]; // Выделяем динамическую память для указателя pStr с размером iLength + 1 (для добавления в конец строки нуль-терминатора).
 
 		for (int i = 0; i < iLength; ++i)
@@ -24,7 +25,7 @@ public:
 
 	MyString(const MyString& other) // Конструктор копирования. Необходим для создания точной копии объекта класса, но в другой области памяти.
 	{
-		int iLength = strlen(other.pStr);
+		iLength = strlen(other.pStr);
 		this->pStr = new char[iLength + 1];
 
 		for (int i = 0; i < iLength; ++i)
@@ -42,7 +43,7 @@ public:
 			delete[] this->pStr;
 		}
 
-		int iLength = strlen(other.pStr); 
+		iLength = strlen(other.pStr); 
 		this->pStr = new char[iLength + 1]; 
 
 		for (int i = 0; i < iLength; ++i)
@@ -58,6 +59,8 @@ public:
 	MyString operator + (const MyString &other) // Реализовали перегрузку оператора сложения.
 	{
 		MyString NewStr;
+
+		NewStr.iLength = strlen(this->pStr) + strlen(other.pStr);
 
 		NewStr.pStr = new char[strlen(this->pStr) + strlen(other.pStr) + 1];
 
@@ -82,8 +85,15 @@ public:
 	{
 		delete[] this->pStr; // После выхода из области действия функции, в которой был создан объект класса, с помощью деструктора очищаем динамическую память, выделенную под массив pStr.
 	}
+
+	int Length()
+	{
+		return iLength;
+	}
+
 private:
 	char *pStr; // Создаем указатель на массив char, хранит символы, которые мы передаем в наш объект.
+	int iLength;
 };
 
 
@@ -93,6 +103,10 @@ int main()
 	MyString str2 = "World";
 
 	MyString result = str + str2;
+
+	cout << str.Length() << "\n";
+	cout << str2.Length() << "\n";
+	cout << result.Length() << "\n";
 
 	return 0;
 }
