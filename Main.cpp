@@ -114,6 +114,8 @@ public:
 		return this->pStr[iIndex];
 	}
 
+	friend std::ostream& operator << (std::ostream& out, const MyString& string); // Создаем дружественную функцию (перегрузку оператора вывода).
+
 	~MyString()
 	{
 		delete[] this->pStr; // После выхода из области действия функции, в которой был создан объект класса, с помощью деструктора очищаем динамическую память, выделенную под массив pStr.
@@ -129,6 +131,13 @@ private:
 	int iLength;
 };
 
+std::ostream& operator << (std::ostream& out, const MyString& string) // Реализация дружественной функции (перегрузки оператора вывода).
+{
+	out << string.pStr;
+
+	return out;
+}
+
 
 int main()
 {
@@ -138,7 +147,6 @@ int main()
 	MyString result;
 
 	result = str + str2;
-
 
 	return 0;
 }
