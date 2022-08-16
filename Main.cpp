@@ -101,12 +101,17 @@ public:
 		return !(this->operator==(other));
 	}
 
+	char & operator [] (int iIndex) // Перегрузили оператор индексирования.
+	{
+		return this->pStr[iIndex];
+	}
+
 	~MyString()
 	{
 		delete[] this->pStr; // После выхода из области действия функции, в которой был создан объект класса, с помощью деструктора очищаем динамическую память, выделенную под массив pStr.
 	}
 
-	int Length()
+	int Length() // Метод, возвращающий длину строки.
 	{
 		return iLength;
 	}
@@ -123,6 +128,7 @@ int main()
 	MyString str2 = "World";
 
 	MyString result = str + str2;
+
 
 	return 0;
 }
