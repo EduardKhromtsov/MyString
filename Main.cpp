@@ -36,6 +36,14 @@ public:
 		this->pStr[iLength] = '\0';
 	}
 
+	MyString(MyString &&other) // Конструктор перемещения.
+	{
+		this->iLength = other.iLength;
+		this->pStr = other.pStr;
+
+		other.pStr = nullptr;
+	}
+
 	MyString& operator = (const MyString &other) // Перегрузили оператор присваивания.
 	{
 		if (this->pStr != nullptr)
@@ -127,7 +135,9 @@ int main()
 	MyString str = "Hello";
 	MyString str2 = "World";
 
-	MyString result = str + str2;
+	MyString result;
+
+	result = str + str2;
 
 
 	return 0;
