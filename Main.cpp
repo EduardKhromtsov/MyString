@@ -4,7 +4,7 @@ using namespace std;
 class MyString
 {
 public:
-	MyString() // Конструктор по умолчанию.
+	MyString() // Конструктор по умолчанию
 	{
 		pStr = nullptr;
 		iLength = 0;
